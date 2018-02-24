@@ -26,7 +26,7 @@ namespace SilphyBot.Modules
         private static List<ulong> ids = new List<ulong>();
         private static List<string> nams = new List<string>(); 
 
-        private const string splitChar = "|";
+        private const string splitChar = BotData.splitChar;
         private const string strikeDataPath = BotData.strikeFilePath;
 
         private const int spacs = 32;

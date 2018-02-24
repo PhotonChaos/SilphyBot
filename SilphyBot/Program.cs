@@ -53,7 +53,7 @@ namespace SilphyBot
             } else {
                 Console.Title = "Silphy Bot";
             }
-
+           
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit); // This calls the CurrentDomain_ProcessExit() method when the program closes
 
             Setup(); // This is just a method that I put in to sort my code. This is not necessary.
@@ -79,7 +79,7 @@ namespace SilphyBot
 
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();
-                
+
             await Task.Delay(-1);
         }
 
@@ -121,6 +121,30 @@ namespace SilphyBot
                 }
                 SLog(context, SLogType.Error, error); // log the error in the console window
             }
+        }
+
+        private async Task SyncCommands(SocketGuild guild) {
+            StreamReader sr = new StreamReader(BotData.dateFilePath);
+            while(sr.EndOfStream) {
+                string s = sr.ReadLine();
+
+                if (s == null) break;
+
+                string[] ss = s.Split(BotData.splitChar.ToCharArray()[0]);
+                int[] q = new int[6];
+                
+                for(int i = 0; i < ss.Length; i++) {
+                    q[i] = Convert.ToInt32(ss[i]);
+                }
+
+                DateTime dt = new DateTime(q[0], q[1], q[2], q[3], q[4], q[5]);
+
+                // Console.WriteLine($"TEST: {guild.GetTextChannel(BotData.testChannelID).GetMessagesAsync(100).ElementAt(0).ToString()}");
+                
+            }
+            sr.Close();
+            File.WriteAllText(BotData.dateFilePath, String.Empty);
+            // await HandleCommandAsync();
         }
 
         private Task Log(LogMessage msg) {
