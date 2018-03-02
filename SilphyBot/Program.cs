@@ -123,30 +123,6 @@ namespace SilphyBot
             }
         }
 
-        private async Task SyncCommands(SocketGuild guild) {
-            StreamReader sr = new StreamReader(BotData.dateFilePath);
-            while(sr.EndOfStream) {
-                string s = sr.ReadLine();
-
-                if (s == null) break;
-
-                string[] ss = s.Split(BotData.splitChar.ToCharArray()[0]);
-                int[] q = new int[6];
-                
-                for(int i = 0; i < ss.Length; i++) {
-                    q[i] = Convert.ToInt32(ss[i]);
-                }
-
-                DateTime dt = new DateTime(q[0], q[1], q[2], q[3], q[4], q[5]);
-
-                // Console.WriteLine($"TEST: {guild.GetTextChannel(BotData.testChannelID).GetMessagesAsync(100).ElementAt(0).ToString()}");
-                
-            }
-            sr.Close();
-            File.WriteAllText(BotData.dateFilePath, String.Empty);
-            // await HandleCommandAsync();
-        }
-
         private Task Log(LogMessage msg) {
             Console.WriteLine(msg.ToString());
             return Task.CompletedTask;

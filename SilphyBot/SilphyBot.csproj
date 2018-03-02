@@ -181,6 +181,7 @@
     <Compile Include="Modules\DangerModule.cs" />
     <Compile Include="Modules\HelpModule.cs" />
     <Compile Include="Modules\TallyModule.cs" />
+    <Compile Include="Modules\UtilityModule.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
