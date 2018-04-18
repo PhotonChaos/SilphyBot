@@ -28,7 +28,7 @@ namespace SilphyBot
         private const string token = BotData.Token; // This is the bot token. It is located in the BotData class which has not been published to this repository for security reasons.
         private const ulong testSilphyChannelID = BotData.testChannelID;
         private const ulong silphyChannelID = BotData.silphyChannelID;
-        private const string prefix = "!"; // the bot command prefix
+        public const string prefix = "!"; // the bot command prefix
         private const bool noPrefix = false; // true if the prefix is not used, false otherwise
         private const bool sayErrors = false; // should the bot say errors in discord
         private static bool testMode = Settings.Default.testMode; // this is to set the testing mode. true is for on, false is for off.
