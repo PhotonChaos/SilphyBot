@@ -31,6 +31,13 @@ namespace SilphyBot.Modules
             await Context.Guild.GetTextChannel(testGeneralId).SendMessageAsync(s);
         }
         
+        [Command("say")]
+        [Summary("Says a phrase in the channel you pass in")]
+        [RequireUserPermission(GuildPermission.ManageMessages)]
+        public async Task SayAsync([Summary("The text channel")]SocketTextChannel ch, [Summary("The message")][Remainder()]string echo) {
+            await ch.SendMessageAsync(echo);
+        }
+
         [Command("roll")]
         [Summary("Rolls X Y-sided dice")]
         public async Task RollAsync([Summary("The number of dice to roll")]int dice, [Summary("The number of sides on each die")]int sides) {
@@ -85,7 +92,39 @@ namespace SilphyBot.Modules
             await ReplyAsync("o3o");
         }
 
-        
+
+        [Command("randommember")]
+        [Alias("rm", "random")]
+        [Summary("Finds a random user on the server")]
+        [RequireUserPermission(GuildPermission.BanMembers)]
+        public async Task FindRandomMemberAsync(params string[] _role) {
+            string role = "";
+            foreach(string r in _role) {
+                role += r + ' ';
+            }
+            role = role.Remove(role.Length - 1);
+            SocketRole rrole = null;
+            foreach(SocketRole r in Context.Guild.Roles) {
+                //Console.WriteLine("\"" + role + "\"");
+                if(r.Name.StartsWith(role)) {
+                    rrole = r;
+                    Console.WriteLine("Role Found!");
+                }
+            }
+
+            List<string> users = new List<string>();
+            foreach (SocketGuildUser user in Context.Guild.Users) {
+                if(user.Roles.Contains(rrole)) {
+                    //Console.WriteLine("A");
+                    users.Add(user.Username + '#' + user.Discriminator);
+                }
+            }
+            Random randy = new Random();
+            string selectedUser = users.ElementAt(randy.Next(users.Count()-1));
+
+            await ReplyAsync("o3o I choose: \n\n" + selectedUser);
+        }
+
         [Command("shutdown")]
         [Summary("Turn off the bot.")]
         [RequireOwner]

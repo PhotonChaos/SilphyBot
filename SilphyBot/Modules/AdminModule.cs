@@ -13,18 +13,35 @@ namespace SilphyBot.Modules
     class AdminModule : ModuleBase<SocketCommandContext> {
         [Command("ban")]
         [Name("ban")]
+        [Summary("Bans a user from the server.")]
         [RequireBotPermission(GuildPermission.BanMembers)]
         [RequireUserPermission(GuildPermission.BanMembers)]
-        public async Task BanMemberAsync(ulong id, string reason = "") {
-            await Context.Guild.AddBanAsync(id);
+        public async Task BanMemberAsync([Summary("The ID of the user to ban")]ulong id, [Summary("The reason that the user will see")]params string[] reason) {
+            string s = "";
+            foreach (string ss in reason) {
+                s += ss + " ";
+            }
+
+            await Context.Guild.AddBanAsync(id, reason:s);
+
+            await ReplyAsync($"*throws hammer*\nThe person with an ID of {id} has been banned o3o");
         }
 
         [Command("ban")]
         [Name("ban")]
+        [Summary("Bans a user from the server.")]
         [RequireBotPermission(GuildPermission.BanMembers)]
         [RequireUserPermission(GuildPermission.BanMembers)]
-        public async Task BanMemberAsync(SocketGuildUser user) {
-            await Context.Guild.AddBanAsync(user);
+        public async Task BanMemberAsync([Summary("The ID of the user to ban")]SocketGuildUser user, [Summary("The reason that the user will see")]params string[] reason) {
+            string s = "";
+
+            foreach(string ss in reason) {
+                s += ss+" ";
+            }
+
+            await Context.Guild.AddBanAsync(user, reason:s);
+
+            await ReplyAsync($"*throws hammer*\n{user.Username}#{user.Discriminator} has been banned o3o");
         }
     }
 }

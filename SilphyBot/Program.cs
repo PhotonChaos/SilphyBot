@@ -49,12 +49,14 @@ namespace SilphyBot
         #region Methods
         private static void Main(string[] args) {
             if (testMode) {
-                Console.Title = "Silphy Bot - Test Mode";
+                Console.Title = $"Silphy Bot v{BotData.botVersion} - Test Mode";
             } else {
-                Console.Title = "Silphy Bot";
+                Console.Title = $"Silphy Bot v{BotData.botVersion}";
             }
            
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit); // This calls the CurrentDomain_ProcessExit() method when the program closes
+
+           
 
             Setup(); // This is just a method that I put in to sort my code. This is not necessary.
 
