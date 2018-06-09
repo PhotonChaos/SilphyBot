@@ -1,6 +1,10 @@
-﻿# Silphy Bot
+# Silphy Bot
 
 This is a discord bot written in C# using the Discord .NET framework.
+
+## Info
+
+There are several files missing from this repository for security reasons, this includes the BotData class, and the data files.
 
 ## SharaXOfficial
 
