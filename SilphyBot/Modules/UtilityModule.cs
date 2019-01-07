@@ -9,7 +9,7 @@ using Discord;
 
 namespace SilphyBot.Modules
 {
-    class UtilityModule : ModuleBase<SocketCommandContext> {
+    public class UtilityModule : ModuleBase<SocketCommandContext> {
         private CommandService _cs;
         private IServiceProvider _sp;
 
